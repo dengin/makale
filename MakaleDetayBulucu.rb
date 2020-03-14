@@ -61,7 +61,7 @@ text.each_line do |line|
   //h4
   //small
   //span[contains(@class, "author")]').each do |vv|
-    yazarBilgileri += "<yazar>" + vv.text.strip + "</yazar>"
+    yazarBilgileri += "<yazaradi>" + vv.text.strip + "</yazaradi>"
   end
   if yazarBilgileri != ""
     makaleBilgileri += "<yazarbilgileri>" + yazarBilgileri + "</yazarbilgileri>"
@@ -70,12 +70,12 @@ text.each_line do |line|
 
   #görüntülenme sayısı
   page.xpath('//meta[contains(@id, "meta_stats_total_article_view")]').each do |vv|
-    makaleBilgileri += "<goruntulenmeSayisi>" + vv['content'] + "</goruntulenmeSayisi>"
+    makaleBilgileri += "<goruntulenmesayisi>" + vv['content'] + "</goruntulenmesayisi>"
   end
 
   #indirilme sayısı
   page.xpath('//meta[contains(@id, "meta_stats_total_article_download")]').each do |vv|
-    makaleBilgileri += "<indirilmeSayisi>" + vv['content'] + "</indirilmeSayisi>"
+    makaleBilgileri += "<indirilmesayisi>" + vv['content'] + "</indirilmesayisi>"
   end
 
   #doi
@@ -91,9 +91,9 @@ text.each_line do |line|
   //div[@id="abstract-tab-content"]//div').each do |vv|
 
       if "#{vv.attributes['id']}" == 'abstract-en'
-        makaleBilgileri += "<abstract>" + vv.text.strip + "</abstract>"
+        makaleBilgileri += "<abstractbilgisi>" + vv.text.strip + "</abstractbilgisi>"
       else
-        makaleBilgileri += "<ozet>" + vv.text.strip + "</ozet>"
+        makaleBilgileri += "<ozetbilgisi>" + vv.text.strip + "</ozetbilgisi>"
       end
   end
 
@@ -148,11 +148,11 @@ text.each_line do |line|
     elsif thId == "Konular"
       makaleBilgileri += "<konular>" + vv.css('td').text.strip + "</konular>"
     elsif thId == "Bölüm"
-      makaleBilgileri += "<birincildil>" + vv.css('td').text.strip + "</birincildil>"
+      makaleBilgileri += "<bolum>" + vv.css('td').text.strip + "</bolum>"
     elsif thId == "Yazarlar"
       vv.css('td').css('p').each do |yy|
 
-        yazarDetayBilgileri += "<yazar>"
+        yazarDetayBilgileri += "<yazardetay>"
         yy = yy.text.strip
         #orcid
         if yy.include?("Orcid")
@@ -192,10 +192,10 @@ text.each_line do |line|
           yazarDetayBilgileri += "<ulke>" + yy[0..sonIndex].strip + "</ulke>"
         end
 
-        yazarDetayBilgileri += "</yazar>"
+        yazarDetayBilgileri += "</yazardetay>"
       end
       if yazarDetayBilgileri != ""
-        makaleBilgileri += "<yazarlar>" + yazarDetayBilgileri + "</yazarlar>"
+        makaleBilgileri += "<yazardetaylari>" + yazarDetayBilgileri + "</yazardetaylari>"
         yazarDetayBilgileri = ""
       end
 
