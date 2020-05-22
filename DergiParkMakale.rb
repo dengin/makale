@@ -1,3 +1,5 @@
+# siralama
+# DergiParkMakale.rb, MakaleDetayBulucu.rb, MakalePdfBirlestirme.rb, MakaleDuzeltme.rb, MakaleBirlestirme.rb
 require 'mechanize'
 require 'nokogiri'
 
@@ -9,7 +11,7 @@ uri='https://dergipark.org.tr/tr/search?q=&section=articles'
 
 
 MAKALE_DOSYASI = "D:/Kisisel/Dersler/Ozyegin/TezCalismasi/RubyProjesi/makaleAdresleri.txt"
-DOSYALANAN_MAKALE_SAYISI_DOSYASI = "D:/Kisisel/Dersler/Ozyegin/TezCalismasi/RubyProjesi//dosyalanan_makale_sayisi.txt"
+DOSYALANAN_MAKALE_SAYISI_DOSYASI = "D:/Kisisel/Dersler/Ozyegin/TezCalismasi/RubyProjesi/dosyalanan_makale_sayisi.txt"
 
 
 def makaleleriBul(page)

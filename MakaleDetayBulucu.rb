@@ -1,47 +1,42 @@
 require 'mechanize'
 require 'nokogiri'
+require 'openssl'
+
+OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
 
 MAKALE_DOSYASI = "D:/Kisisel/Dersler/Ozyegin/TezCalismasi/RubyProjesi/makaleAdresleri.txt"
-DOSYALANAN_MAKALE_SAYISI_DOSYASI = "D:/Kisisel/Dersler/Ozyegin/TezCalismasi/RubyProjesi//dosyalanan_makale_sayisi.txt"
-makale_sayisi = File.read(DOSYALANAN_MAKALE_SAYISI_DOSYASI).to_i
-
+DOSYALANAN_MAKALE_SAYISI_DOSYASI = "D:/Kisisel/Dersler/Ozyegin/TezCalismasi/RubyProjesi/dosyalanan_makale_sayisi.txt"
 
 mechanize = Mechanize.new
-line_num=1
+line_num=0
 text=File.open(MAKALE_DOSYASI).read
 text.gsub!(/\r\n?/, "\n")
 
-makaleBilgileri = "<makaleler>"
+makaleBilgileri = ""
 yazarBilgileri = ""
 keywordBilgileri = ""
 anahtarBilgileri = ""
 kaynakBilgileri = ""
-thId = ""
 yazarDetayBilgileri = ""
-sonIndex = 0
-makaleDetayDosyasi = ""
 
 text.each_line do |line|
 
+  line_num += 1
   if line_num % 20 == 0
     sleep(5)
   end
 
-  if line_num > 0 and line_num % 201 == 0
-    makaleDetayDosyasi = "D:/Kisisel/Dersler/Ozyegin/TezCalismasi/RubyProjesi/makaleDetayDosyasi" + (line_num / 201).to_s + ".txt"
-    File.open(makaleDetayDosyasi, "w") do |f|
-      f.write(makaleBilgileri)
-    end
-    makaleBilgileri = ""
-  end
-
-  makaleBilgileri += "<makale>"
-
   begin
     page = mechanize.get(line)
   rescue Mechanize::ResponseCodeError
+    puts ("hata response code error: " + line_num.to_s)
+    next
+  rescue SocketError
+    puts ("hata socket error: " + line_num.to_s)
     next
   end
+
+  makaleBilgileri += "<makale>"
 
   #sıra numarası
   makaleBilgileri += "<sira>" + line_num.to_s + "</sira>"
@@ -51,8 +46,13 @@ text.each_line do |line|
   page.xpath('//div[contains(@class, "panel-body")]
   //div[@id="articleTitle"]
   //h2[contains(@class, "title")]
-  //div[contains(@class, "tab-content")]//div[1]').each do |vv|
-    makaleBilgileri += "<baslik>" + vv.text.strip + "</baslik>"
+  //div[contains(@class, "tab-content")]//div').each do |vv|
+
+    if "#{vv.attributes['id']}" == 'title-en'
+      makaleBilgileri += "<title>" + vv.text.strip + "</title>"
+    else
+      makaleBilgileri += "<baslik>" + vv.text.strip + "</baslik>"
+    end
   end
 
   #yazar bilgileri
@@ -205,14 +205,15 @@ text.each_line do |line|
 
 
   makaleBilgileri += "</makale>\n"
-  line_num += 1
 
-  #print "#{line_num += 1} #{line}"
-
-  #break if line_num == 10
+  if line_num > 0 and line_num % 200 == 0
+    makaleDetayDosyasi = "D:/Kisisel/Dersler/Ozyegin/TezCalismasi/RubyProjesi/makaleDetayDosyasi" + (line_num / 200).to_s + ".txt"
+    File.open(makaleDetayDosyasi, "w") do |f|
+      f.write(makaleBilgileri)
+    end
+    makaleBilgileri = ""
+  end
 
   puts "#{line_num}"
 end
-makaleBilgileri += "</makaleler>"
-#puts makaleBilgileri
 
