@@ -1,0 +1,33 @@
+<makale>
+    <sira></sira>
+    <pdf></pdf>
+    <title></title>
+    <baslik></baslik>
+    <yazarbilgileri>
+        <yazaradi></yazaradi>
+    </yazarbilgileri>
+    <goruntulenmesayisi></goruntulenmesayisi>
+    <indirilmesayisi></indirilmesayisi>
+    <abstractbilgisi></abstractbilgisi>
+    <ozetbilgisi></ozetbilgisi>
+    <keywordbilgileri>
+        <keyword></keyword>
+    </keywordbilgileri>
+    <anahtarbilgileri>
+        <anahtar></anahtar>
+    </anahtarbilgileri>
+    <kaynakbilgileri>
+        <kaynak></kaynak>
+    </kaynakbilgileri>
+    <birincildil></birincildil>
+    <konular></konular>
+    <bolum></bolum>
+    <yazardetaylari>
+        <yazardetay>
+            <yazarorcid></yazarorcid>
+            <yazaradi></yazaradi>
+            <kurumadi></kurumadi>
+            <ulke></ulke>
+        </yazardetay>
+    </yazardetaylari>
+</makale>
