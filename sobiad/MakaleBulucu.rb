@@ -5,10 +5,10 @@ require 'openssl'
 OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
 I_KNOW_THAT_OPENSSL_VERIFY_PEER_EQUALS_VERIFY_NONE_IS_WRONG = nil
 
-uri='https://atif.sobiad.com/index.jsp?yil=2010&yil=2020&searchword=bir&secenekler=text&alan=fen&modul=arama-sonuclari&sayfaid='
+uri='https://atif.sobiad.com/index.jsp?yil=2010&yil=2020&searchword=gerçek&secenekler=text&alan=fen&modul=arama-sonuclari&sayfaid='
 
-MAKALE_DOSYASI2 = "D:/Kisisel/Dersler/Ozyegin/TezCalismasi/RubyProjesi/Sobiad/makaleAdresleri.txt"
-DOSYALANAN_MAKALE_SAYISI_DOSYASI2 = "D:/Kisisel/Dersler/Ozyegin/TezCalismasi/RubyProjesi/Sobiad/dosyalanan_makale_sayisi.txt"
+MAKALE_DOSYASI2 = "D:/makaleAdresleri_gercek.txt"
+DOSYALANAN_MAKALE_SAYISI_DOSYASI2 = "D:/dosyalanan_makale_sayisi_gercek.txt"
 
 
 def makaleleriBul(page)
