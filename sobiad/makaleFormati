@@ -1,0 +1,14 @@
+<makale>
+    <sira></sira>
+    <pdf></pdf>
+    <baslik></baslik>
+    <yil></yil>
+    <yazarbilgileri>
+        <yazaradi></yazaradi>
+    </yazarbilgileri>
+    <doi></doi>
+    <ozet></ozet>
+    <anahtarbilgileri>
+        <anahtar></anahtar>
+    </anahtarbilgileri>
+</makale>
